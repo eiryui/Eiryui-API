@@ -1,0 +1,36 @@
+{
+  "name": "Eiryui — Anime. Anytime. Anywhere.",
+  "short_name": "Eiryui",
+  "description": "Watch anime anytime, anywhere. Free streaming on Eiryui.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait-primary",
+  "theme_color": "#08080e",
+  "background_color": "#08080e",
+  "categories": ["entertainment", "video"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/logo_favicons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo_favicons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo_favicons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": []
+}
