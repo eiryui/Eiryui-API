@@ -1,29 +1,79 @@
-# Eiryui API v3.2
+<div align="center">
 
-> DISCLAIMER: This API is experimental and not reliable. Stability is not guaranteed. Expect occasional downtime, breaking changes, and inaccurate responses. Not recommended for critical or production use. Proceed at your own risk.
+<img src="logo_favicons/logo.png" alt="Eiryui API" width="120" />
 
-Current Status: 10/26/2026 (working, native providers)
+# 🌸 Eiryui API v3.2
 
-An anime streaming API built for scale. Eiryui provides a clean REST interface to search, filter, and stream anime content with automatic source extraction and proxy capabilities. Streaming runs on **10 native Python providers** (no sidecars, no external aggregator needed) — every `/extract` call **races all providers concurrently and the fastest success wins**, with a rolling latency table that keeps the closest/fastest provider as the default.
+**An anime streaming API built for scale — search, filter and stream with automatic source extraction.**
 
-## Features
+![Status](https://img.shields.io/badge/status-archived-critical?style=for-the-badge&logo=archive&logoColor=white)
+![Maintenance](https://img.shields.io/badge/maintenance-no%20further%20updates-red?style=for-the-badge)
+![Stability](https://img.shields.io/badge/stability-experimental-orange?style=for-the-badge)
+![Python](https://img.shields.io/badge/python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 
--  **Smart Search** - Search by anime name or AniList ID
--  **Auto-Extraction** - Races 10 native providers, fastest stream wins
--  **Sub/Dub flags** - `?type=sub|dub` on extraction, per-audio episode lists
--  **Latency-ranked default** - Fastest provider becomes the default automatically
--  **Movie Detection** - Automatically handles movies vs episodes
--  **Decryption Pipeline** - Native MegaPlay/FlixCloud extractors in Python
--  **CORS Proxy** - Built-in proxy for bypassing CDN restrictions
--  **HLS Streaming** - Full M3U8 playlist and segment proxying
+### 🧭 Menu
 
-## Installation
+[🏠 Overview](#-overview) •
+[✨ Features](#-features) •
+[📦 Installation](#-installation) •
+[🗂️ Structure](#️-project-structure) •
+[🔎 Endpoints](#-api-endpoints) •
+[🎬 Streaming](#-streaming) •
+[🧩 Providers](#-native-providers) •
+[🔀 Proxy](#-proxy-endpoints) •
+[💡 Examples](#-usage-examples) •
+[⚙️ Config](#️-configuration) •
+[📜 License](#-license)
 
-### Prerequisites
+</div>
+
+---
+
+> [!CAUTION]
+> ## 🛑 PROJECT ARCHIVED — NO FURTHER UPDATES
+> **This repository is archived and no longer maintained.**
+> - ❌ No new features, bug fixes or security patches will be released.
+> - ❌ Providers may break at any time as upstream sites change, and they will **not** be repaired.
+> - ❌ Issues and pull requests will not be reviewed.
+>
+> You are free to **fork** it and continue the work on your own.
+
+> [!WARNING]
+> ## ⚠️ DISCLAIMER
+> This API is **experimental and not reliable**. Stability is **not guaranteed**.
+> Expect **occasional downtime**, **breaking changes**, and **inaccurate responses**.
+> **Not recommended for critical or production use. Proceed at your own risk.**
+
+> [!NOTE]
+> 📅 **Last known status:** 10/26/2026 — working, native providers (no longer monitored).
+
+---
+
+## 🏠 Overview
+
+Eiryui provides a clean REST interface to search, filter, and stream anime content with automatic source extraction and proxy capabilities. Streaming runs on **10 native Python providers** (no sidecars, no external aggregator needed) — every `/extract` call **races all providers concurrently and the fastest success wins**, with a rolling latency table that keeps the closest/fastest provider as the default.
+
+## ✨ Features
+
+| | Feature | Description |
+|---|---|---|
+| 🔍 | **Smart Search** | Search by anime name or AniList ID |
+| ⚡ | **Auto-Extraction** | Races 10 native providers, fastest stream wins |
+| 🎧 | **Sub/Dub flags** | `?type=sub\|dub` on extraction, per-audio episode lists |
+| 🏁 | **Latency-ranked default** | Fastest provider becomes the default automatically |
+| 🎞️ | **Movie Detection** | Automatically handles movies vs episodes |
+| 🔓 | **Decryption Pipeline** | Native MegaPlay/FlixCloud extractors in Python |
+| 🌐 | **CORS Proxy** | Built-in proxy for bypassing CDN restrictions |
+| 📺 | **HLS Streaming** | Full M3U8 playlist and segment proxying |
+
+## 📦 Installation
+
+### 📋 Prerequisites
 - Python 3.8+
 - pip
 
-### Setup
+### 🚀 Setup
 
 1. Clone the repository:
 ```bash
@@ -46,7 +96,7 @@ uvicorn api:app --reload --host 0.0.0.0 --port 4000
 http://127.0.0.1:4000
 ```
 
-## Project Structure
+## 🗂️ Project Structure
 
 ```
 Eiryui-API/
@@ -66,13 +116,13 @@ Eiryui-API/
 │   ├── queries.py           # GraphQL query templates
 │   └── config.py            # Configuration & constants
 ├── api.py                   # Alternative entry point
-├── .gitignore              # Git ignore rules
-└── README.md               # This file
+├── .gitignore               # Git ignore rules
+└── README.md                # This file
 ```
 
-## API Endpoints
+## 🔎 API Endpoints
 
-### Search & Discovery
+### 🔍 Search & Discovery
 
 #### `GET /anime/search`
 Search anime by keyword with pagination.
@@ -106,12 +156,11 @@ List all available genres for filtering.
 curl "http://127.0.0.1:4000/anime/genres"
 ```
 
-### Collections
+### 📚 Collections
 
 #### `GET /anime/spotlight`
 Top 10 trending and popular anime.
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/spotlight"
 ```
@@ -119,11 +168,8 @@ curl "http://127.0.0.1:4000/anime/spotlight"
 #### `GET /anime/trending`
 Currently trending anime with pagination.
 
-**Parameters:**
-- `page` (int, default: 1)
-- `per_page` (int, default: 20, max: 50)
+**Parameters:** `page` (int, default: 1), `per_page` (int, default: 20, max: 50)
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/trending?page=1&per_page=20"
 ```
@@ -131,11 +177,8 @@ curl "http://127.0.0.1:4000/anime/trending?page=1&per_page=20"
 #### `GET /anime/popular`
 Most popular anime of all time.
 
-**Parameters:**
-- `page` (int, default: 1)
-- `per_page` (int, default: 20, max: 50)
+**Parameters:** `page` (int, default: 1), `per_page` (int, default: 20, max: 50)
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/popular"
 ```
@@ -143,11 +186,8 @@ curl "http://127.0.0.1:4000/anime/popular"
 #### `GET /anime/upcoming`
 Upcoming anime releases.
 
-**Parameters:**
-- `page` (int, default: 1)
-- `per_page` (int, default: 20, max: 50)
+**Parameters:** `page` (int, default: 1), `per_page` (int, default: 20, max: 50)
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/upcoming"
 ```
@@ -155,11 +195,8 @@ curl "http://127.0.0.1:4000/anime/upcoming"
 #### `GET /anime/recent`
 Recently aired episodes.
 
-**Parameters:**
-- `page` (int, default: 1)
-- `per_page` (int, default: 20, max: 50)
+**Parameters:** `page` (int, default: 1), `per_page` (int, default: 20, max: 50)
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/recent"
 ```
@@ -167,16 +204,13 @@ curl "http://127.0.0.1:4000/anime/recent"
 #### `GET /anime/schedule`
 Airing schedule for upcoming episodes.
 
-**Parameters:**
-- `page` (int, default: 1)
-- `per_page` (int, default: 20, max: 50)
+**Parameters:** `page` (int, default: 1), `per_page` (int, default: 20, max: 50)
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/schedule"
 ```
 
-### Advanced Filtering
+### 🎛️ Advanced Filtering
 
 #### `GET /anime/filter`
 Filter anime by multiple criteria.
@@ -200,17 +234,15 @@ Filter anime by multiple criteria.
 - `FAVOURITES_DESC` - Most favorited
 - `UPDATED_AT_DESC` - Recently updated
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/filter?genre=Action&sort=SCORE_DESC&year=2024"
 ```
 
-### Anime Details
+### 📖 Anime Details
 
 #### `GET /anime/info/{anilist_id}`
 Complete anime information including characters, relations, staff, and recommendations.
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/info/21"
 ```
@@ -218,11 +250,8 @@ curl "http://127.0.0.1:4000/anime/info/21"
 #### `GET /anime/anime/{anilist_id}/characters`
 Character list with voice actors.
 
-**Parameters:**
-- `page` (int, default: 1)
-- `per_page` (int, default: 25, max: 50)
+**Parameters:** `page` (int, default: 1), `per_page` (int, default: 25, max: 50)
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/anime/21/characters"
 ```
@@ -230,7 +259,6 @@ curl "http://127.0.0.1:4000/anime/anime/21/characters"
 #### `GET /anime/anime/{anilist_id}/relations`
 Related anime (sequels, prequels, spin-offs).
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/anime/21/relations"
 ```
@@ -238,28 +266,24 @@ curl "http://127.0.0.1:4000/anime/anime/21/relations"
 #### `GET /anime/anime/{anilist_id}/recommendations`
 Recommended similar anime.
 
-**Parameters:**
-- `page` (int, default: 1)
-- `per_page` (int, default: 10, max: 25)
+**Parameters:** `page` (int, default: 1), `per_page` (int, default: 10, max: 25)
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/anime/21/recommendations"
 ```
 
-### Streaming
+## 🎬 Streaming
 
 #### `GET /anime/episodes/{anilist_id}`
 Episode lists merged from all native providers concurrently, split by audio (`sub` / `dub`). Falls back to the legacy pipe if no native provider matches.
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/episodes/21"
 # → { anilistId, source: "native", providers: { anineko: { episodes: { sub: [...], dub: [...] }, meta }, ... } }
 ```
 
 #### `GET /anime/extract/{query}`
-**Magic endpoint** - Races all native providers concurrently; **fastest success wins** and feeds the latency table that picks the default provider.
+**✨ Magic endpoint** - Races all native providers concurrently; **fastest success wins** and feeds the latency table that picks the default provider.
 
 **Parameters:**
 - `query` (string, required) - AniList ID (21) or anime name (violet evergarden)
@@ -298,18 +322,18 @@ curl "http://127.0.0.1:4000/anime/extract/my-hero-academia?e=5"
 curl "http://127.0.0.1:4000/anime/extract/a-silent-voice"
 ```
 
-**Tip:** If search by name fails, use `/anime/search?query=<name>` to get the exact AniList ID first.
+> [!TIP]
+> If search by name fails, use `/anime/search?query=<name>` to get the exact AniList ID first.
 
 #### `GET /anime/providers/status`
 Live provider ranking, availability and measured latency. (`/anime/bridge-status` is a deprecated alias.)
 
-**Example:**
 ```bash
 curl "http://127.0.0.1:4000/anime/providers/status"
 # → { defaultProvider: "anineko", ranking: [...], available: [...], latency: { anineko: { avg_seconds, failures } } }
 ```
 
-### Native Providers
+## 🧩 Native Providers
 
 All ports are pure Python (`src/providers/`, httpx only). Tested 10/09/2026 on Naruto (220 eps), One Piece and Demon Slayer:
 
@@ -328,7 +352,10 @@ All ports are pure Python (`src/providers/`, httpx only). Tested 10/09/2026 on N
 
 Skipped: `2dhive` (partial library, embed-only), `anidbapp` / `animenosub` / `senshi` / `animedunya` (no results on test titles).
 
-### Proxy Endpoints
+> [!WARNING]
+> These results reflect testing at the time of the last release. Since the project is archived, providers are **not** being kept up to date and may already be broken.
+
+## 🔀 Proxy Endpoints
 
 #### `GET /proxy_m3u8`
 Proxy M3U8 playlists with referer injection and URL rewriting.
@@ -344,9 +371,9 @@ Proxy video segments with referer injection.
 - `url` (string, required) - Segment URL
 - `referer` (string, required) - Referer header value
 
-## Usage Examples
+## 💡 Usage Examples
 
-### Basic Workflow
+### 🧭 Basic Workflow
 
 1. **Search for anime:**
 ```bash
@@ -368,7 +395,7 @@ curl "http://127.0.0.1:4000/anime/episodes/101922"
 curl "http://127.0.0.1:4000/anime/extract/101922?e=1"
 ```
 
-### Quick Extraction
+### ⚡ Quick Extraction
 
 Skip all steps and directly extract:
 ```bash
@@ -379,7 +406,7 @@ curl "http://127.0.0.1:4000/anime/extract/demon%20slayer?e=1"
 curl "http://127.0.0.1:4000/anime/extract/101922?e=1"
 ```
 
-## Response Format
+## 📬 Response Format
 
 All endpoints return JSON with consistent structure:
 
@@ -417,7 +444,7 @@ All endpoints return JSON with consistent structure:
 
 Stream `type` is one of `hls` | `mp4` | `dash` | `embed` (embeds need a client-side player or extractor).
 
-## Configuration
+## ⚙️ Configuration
 
 Edit `src/config.py` to customize:
 - AniList API URL
@@ -430,7 +457,7 @@ Tune the race in `src/providers/_race.py`:
 - `WATCH_TIMEOUT` / `EPISODES_TIMEOUT` - per-provider timeouts
 - `WATCH_CACHE_TTL` - short cache for tokenized stream URLs
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **FastAPI** - Modern async web framework
 - **httpx** - Async HTTP client
@@ -439,14 +466,14 @@ Tune the race in `src/providers/_race.py`:
 - **Native providers** - Pure-Python scrapers + extractors (`src/providers/`)
 - **Miruro Pipe** - Legacy fallback for streaming sources
 
-## Development
+## 🧑‍💻 Development
 
 Run in development mode with auto-reload:
 ```bash
 uvicorn api:app --reload --host 0.0.0.0 --port 4000
 ```
 
-## Notes
+## 📝 Notes
 
 - All image URLs are automatically proxied through serveproxy.com
 - Provider priority is dynamic: fastest measured latency wins (see `/anime/providers/status`)
@@ -455,10 +482,16 @@ uvicorn api:app --reload --host 0.0.0.0 --port 4000
 - M3U8 playlists and segments are proxied to bypass referer checks
 - CORS is enabled for all origins
 
-## License
+## 📜 License
 
 Educational purposes only. Respect content creators and copyright laws.
 
 ---
 
+<div align="center">
+
+![Archived](https://img.shields.io/badge/🗄️_ARCHIVED-no_further_updates-red?style=for-the-badge)
+
 **Built with ❤️ for the anime community**
+
+</div>
