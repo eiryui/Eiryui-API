@@ -484,7 +484,7 @@ uvicorn api:app --reload --host 0.0.0.0 --port 4000
 
 ## 📜 License
 
-Educational purposes only. Respect content creators and copyright laws.
+MIT (LICEANCE)[LICEANCE] Educational purposes only. Respect content creators and copyright laws.
 
 ---
 
