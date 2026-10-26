@@ -2,7 +2,7 @@
 
 > DISCLAIMER: This API is experimental and not reliable. Stability is not guaranteed. Expect occasional downtime, breaking changes, and inaccurate responses. Not recommended for critical or production use. Proceed at your own risk.
 
-Current Status: 10/09/2026 (working, native providers)
+Current Status: 10/26/2026 (working, native providers)
 
 An anime streaming API built for scale. Eiryui provides a clean REST interface to search, filter, and stream anime content with automatic source extraction and proxy capabilities. Streaming runs on **10 native Python providers** (no sidecars, no external aggregator needed) — every `/extract` call **races all providers concurrently and the fastest success wins**, with a rolling latency table that keeps the closest/fastest provider as the default.
 
