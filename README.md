@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="logo_favicons/logo.png" alt="Eiryui API" width="120" />
+<img src="logo_favicons/logo.png" alt="Eiryui API" width="240" />
 
-# 🌸 Eiryui API v3.2
+# Eiryui API v3.2
 
 **An anime streaming API built for scale — search, filter and stream with automatic source extraction.**
 
