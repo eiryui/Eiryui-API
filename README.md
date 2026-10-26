@@ -489,7 +489,7 @@ MIT [LICENSE](LICENSE). Educational purposes only. Respect content creators and 
 
 ## ⚖️ DMCA
 
-Eiryui-API does not host, store, or distribute any media content. It resolves publicly accessible URLs served by third-party sites. For copyright concerns about content on those sites, contact them directly. To report infringement in the SDK code or this repository, open an issue tagged `legal`.
+Eiryui-API does not host, store, or distribute any media content. It resolves publicly accessible URLs served by third-party sites. For copyright concerns about content on those sites, contact them directly. To report infringement in the API code or this repository, open an issue tagged `legal`.
 
 ---
 <div align="center">
